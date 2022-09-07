@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов (простой)»
 
 * Студент: [Alexey Ivanov](https://up.htmlacademy.ru/nodejs-api/2/user/406527).
-* Наставник: `Неизвестно`.
+* Наставник: [Павел Белик](https://up.htmlacademy.ru/nodejs-api/2/user/84572).
 
 ---
 
