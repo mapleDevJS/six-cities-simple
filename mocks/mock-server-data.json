@@ -1,0 +1,80 @@
+{
+  "api": {
+    "names": [
+      "Parisian Dream Magnificent View on Eiffel tower",
+      "Modern city studio in the heart of Cologne"
+    ],
+    "descriptions": [
+      "A cozy, classy and authentic Parisian apartment from the XIXth century. Located in the most luxurious area of Paris. The view of the eiffel tower is just incredible.300m to EIFFEL TOWER - 800m to Champs Elysées - 100m to Trocadero - 50m to metro.",
+      "Central micro-studio with full equipment. Right across from Cologne's main train station and Cologne's cathedral, it's a perfect place to stay. In the immediate vicinity are the Philharmonie, Schildergasse, Cologne's Old Town and the Musical Cathedral. Countless restaurants and bars are within walking distance."
+    ],
+    "cities": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
+    ],
+    "previews": [
+      "https://a0.muscache.com/im/pictures/98808231/cc591fe7_original.jpg?im_w=720",
+      "https://a0.muscache.com/im/pictures/766e6b0a-fe6d-4fc3-9c55-5203a8b35c84.jpg?im_w=1200"
+    ],
+    "pictures": [
+      "https://a0.muscache.com/im/pictures/98808231/cc591fe7_original.jpg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/98807904/4f621226_original.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/98807855/329be4f6_original.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/98807940/ae5502ec_original.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/100422282/da47bf18_original.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/98807925/9aab979b_original.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/766e6b0a-fe6d-4fc3-9c55-5203a8b35c84.jpg?im_w=1200",
+      "https://a0.muscache.com/im/pictures/8e83045e-93cb-4f2c-b9da-0444792b053a.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/9126c701-0796-4ca2-92d3-2c1b257b16f4.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/f3a66b0d-4160-409b-bb78-93d3ff0bde52.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/f61433ea-0af9-414e-95b1-09cf370cd554.jpg?im_w=1440",
+      "https://a0.muscache.com/im/pictures/588563a9-31c8-4cf0-94d8-7e6f2573b14e.jpg?im_w=1440"
+    ],
+    "types": [
+      "Apartment",
+      "House",
+      "Room",
+      "Hotel"
+    ],
+    "facilities": [
+      "Breakfast",
+      "AirConditioning",
+      "LaptopFriendlyWorkspace",
+      "BabySeat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+    "users": [
+    "Louis Eugene",
+    "Refik"
+    ],
+    "emails": [
+    "snow@pisem.local",
+    "president@dka.local",
+    "fish@big.local",
+    "test@pisem.local",
+    "freedom@pisem.local",
+    "rolan@pochta.local",
+    "author@mir.local",
+    "test@lost.loca",
+    "kujo-fan@story.local"
+    ],
+    "avatars": [
+    "user.jpg",
+    "photo.jpg",
+    "awesome-avatar.jpg",
+    "roland.jpg",
+    "smit.jpg",
+    "coffee.jpg"
+    ],
+    "coordinates": [
+      "48.85661 2.351499",
+      "50.938361 6.959974"
+    ]
+  }
+}
