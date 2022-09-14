@@ -3,7 +3,7 @@ import { FileReaderInterface } from './file-reader.interface.js';
 import {Offer} from '../../types/offer.type';
 import {OfferType} from '../../types/offer-type.enum';
 import {City} from '../../types/city.enum';
-import {Facility} from '../../types/Facility.enum';
+import {Facility} from '../../types/facility.enum';
 
 export default class TSVFileReader implements FileReaderInterface {
   private rawData = '';

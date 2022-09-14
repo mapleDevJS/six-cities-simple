@@ -1,5 +1,5 @@
 import {City} from './city.enum';
-import {Facility} from './Facility.enum';
+import {Facility} from './facility.enum';
 import {OfferType} from './offer-type.enum';
 import {User} from './user.type';
 import {Coords} from './coords.type';
