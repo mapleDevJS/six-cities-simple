@@ -35,7 +35,7 @@ const Price = {
 const WeekDay = {
   FIRST: 1,
   LAST: 7
-}
+};
 
 export default class OfferGenerator implements OfferGeneratorInterface {
   constructor(private readonly mockData: MockData) {}
@@ -45,7 +45,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const description = getRandomItem<string>(this.mockData.descriptions);
     const createDate =  dayjs().subtract(generateRandomValue(WeekDay.FIRST, WeekDay.LAST), 'day').toISOString();
     const city = getRandomItem<City>(this.mockData.cities);
-    const preview = getRandomItems<string>(this.mockData.previews);
+    const preview = getRandomItem<string>(this.mockData.previews);
     const pictures = getRandomItems<string>(this.mockData.pictures);
     const isPremium = Math.random() < 0.5;
     const rating = getRandomFloat(Rating.MIN, Rating.MAX, 1);
@@ -64,8 +64,8 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const [latitude, longitude] = coords.split(' ');
 
     return [
-      name, description, createDate, city, type, preview, pictures, isPremium, rating, type,bedrooms, guests, price, facilities,
-      firstname, lastname, email, avatarPath, comments, latitude, longitude
+      name, description, createDate, city, preview, pictures, isPremium, rating, type, bedrooms, guests, price, facilities,
+      email, avatarPath, firstname, lastname, comments, latitude, longitude
     ].join('\t');
   }
 }
