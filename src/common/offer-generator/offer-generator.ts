@@ -46,14 +46,14 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const createDate =  dayjs().subtract(generateRandomValue(WeekDay.FIRST, WeekDay.LAST), 'day').toISOString();
     const city = getRandomItem<City>(this.mockData.cities);
     const preview = getRandomItem<string>(this.mockData.previews);
-    const pictures = getRandomItems<string>(this.mockData.pictures);
+    const pictures = getRandomItems<string>(this.mockData.pictures).join(';');
     const isPremium = Math.random() < 0.5;
     const rating = getRandomFloat(Rating.MIN, Rating.MAX, 1);
     const type = getRandomItem<OfferType>(this.mockData.types);
     const bedrooms = getRandomIntInclusive(Bedrooms.MIN, Bedrooms.MAX);
     const guests = getRandomIntInclusive(Guests.MIN, Guests.MAX);
     const price = getRandomIntInclusive(Price.MIN, Price.MAX);
-    const facilities = getRandomItems<Facility>(this.mockData.facilities);
+    const facilities = getRandomItems<Facility>(this.mockData.facilities).join(';');
     const author = getRandomItem<string>(this.mockData.users);
     const email = getRandomItem<string>(this.mockData.emails);
     const avatarPath = getRandomItem<string>(this.mockData.avatars);
