@@ -1,53 +1,34 @@
-import { readFileSync } from 'fs';
 import { FileReaderInterface } from './file-reader.interface.js';
-import {Offer} from '../../types/offer.type';
-import {OfferType} from '../../types/offer-type.enum';
-import {City} from '../../types/city.enum';
-import {Facility} from '../../types/Facility.enum';
+import EventEmitter from 'events';
+import { createReadStream } from 'fs';
 
-export default class TSVFileReader implements FileReaderInterface {
-  private rawData = '';
-
-  constructor(public filename: string) { }
-
-  public read(): void {
-    this.rawData = readFileSync(this.filename, { encoding: 'utf8' });
+export default class TSVFileReader extends EventEmitter implements FileReaderInterface {
+  constructor(public filename: string) {
+    super();
   }
 
-  public toArray(): Offer[] {
-    if (!this.rawData) {
-      return [];
+  public async read():Promise<void> {
+    const stream = createReadStream(this.filename, {
+      highWaterMark: 16384, // 16KB
+      encoding: 'utf-8',
+    });
+
+    let lineRead = '';
+    let endLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of stream) {
+      lineRead += chunk.toString();
+
+      while ((endLinePosition = lineRead.indexOf('\n')) >= 0) {
+        const completeRow = lineRead.slice(0, endLinePosition + 1);
+        lineRead = lineRead.slice(++endLinePosition);
+        importedRowCount++;
+
+        this.emit('line', completeRow);
+      }
     }
 
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim() !== '')
-      .map((line) => line.split('\t'))
-      .map(([name, description, createDate, city, preview, pictures, premium, rating, type, bedrooms, guests, price, facilities, email, avatarPath, firstName, lastName, comments, latitude, longitude]) => ({
-        name,
-        description,
-        createDate: new Date(createDate),
-        city: city as City,
-        preview,
-        pictures: pictures.split(';').map((picture) => picture),
-        isPremium: Boolean(premium),
-        rating: Number.parseInt(rating, 10),
-        type: type as OfferType,
-        bedrooms: Number.parseInt(bedrooms, 10),
-        guests: Number.parseInt(guests, 10),
-        price: Number.parseInt(price, 10),
-        facilities: facilities.split(';').map((facility ) => (facility as Facility)),
-        user: {
-          email,
-          avatarPath,
-          firstName,
-          lastName
-        },
-        comments: Number.parseInt(comments, 10),
-        coords: {
-          latitude: Number.parseFloat(latitude),
-          longitude: Number.parseFloat(longitude)
-        }
-      }));
+    this.emit('end', importedRowCount);
   }
 }
