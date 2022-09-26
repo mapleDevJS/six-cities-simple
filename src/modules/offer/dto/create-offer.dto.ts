@@ -5,6 +5,7 @@ import {User} from '../../../types/user.type';
 import {Coords} from '../../../types/coords.type';
 
 export default class CreateOfferDto {
+  public userId!: string;
   public name!: string;
   public description!: string;
   public publishedDate!: Date;

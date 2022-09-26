@@ -5,11 +5,11 @@ import {Facility} from '../types/facility.enum';
 
 export const createOffer = (row: string) => {
   const tokens = row.replace('\n', '').split('\t');
-  const [name, description, createDate, city, preview, pictures, premium, rating, type, bedrooms, guests, price, facilities, email, avatarPath, firstName, lastName, comments, latitude, longitude] = tokens;
+  const [name, description, publishedDate, city, preview, pictures, premium, rating, type, bedrooms, guests, price, facilities, email, avatarPath, firstName, lastName, comments, latitude, longitude] = tokens;
   return {
     name,
     description,
-    createDate: new Date(createDate),
+    publishedDate: new Date(publishedDate),
     city: city as City,
     preview,
     pictures: pictures.split(';').map((picture) => picture),
