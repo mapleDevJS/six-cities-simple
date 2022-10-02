@@ -28,13 +28,13 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({required: false, default: ''})
   public avatarPath!: string;
 
-  @prop({ required: true, minlength: 1, maxlength: 15, default: '' })
+  @prop({ required: true, default: '' })
   public firstName!: string;
 
-  @prop({required: true, minlength: 1, maxlength: 15, default: ''})
+  @prop({required: true, default: ''})
   public lastName!: string;
 
-  @prop({ required: true, minlength: 6, maxlength: 12 })
+  @prop({ required: true, default: '' })
   public password!: string;
 
   @prop()
@@ -47,7 +47,6 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   public getPassword() {
     return this.password;
   }
-
 }
 
 export const UserModel = getModelForClass(UserEntity);
