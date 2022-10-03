@@ -7,7 +7,7 @@ import {Coords} from './coords.type';
 export type Offer = {
   name: string;
   description: string;
-  createDate: Date;
+  publishedDate: Date;
   city: City;
   preview: string,
   pictures: string[],

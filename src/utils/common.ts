@@ -1,14 +1,15 @@
+import crypto from 'crypto';
 import { OfferType } from '../types/offer-type.enum.js';
 import {City} from '../types/city.enum';
 import {Facility} from '../types/facility.enum';
 
 export const createOffer = (row: string) => {
   const tokens = row.replace('\n', '').split('\t');
-  const [name, description, createDate, city, preview, pictures, premium, rating, type, bedrooms, guests, price, facilities, email, avatarPath, firstName, lastName, comments, latitude, longitude] = tokens;
+  const [name, description, publishedDate, city, preview, pictures, premium, rating, type, bedrooms, guests, price, facilities, email, avatarPath, firstName, lastName, comments, latitude, longitude] = tokens;
   return {
     name,
     description,
-    createDate: new Date(createDate),
+    publishedDate: new Date(publishedDate),
     city: city as City,
     preview,
     pictures: pictures.split(';').map((picture) => picture),
@@ -35,3 +36,8 @@ export const createOffer = (row: string) => {
 
 export const getErrorMessage = (error: unknown): string =>
   error instanceof Error ? error.message : '';
+
+export const createSHA256 = (line: string, salt: string): string => {
+  const shaHasher = crypto.createHmac('sha256', salt);
+  return shaHasher.update(line).digest('hex');
+};
