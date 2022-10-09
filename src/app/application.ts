@@ -22,7 +22,7 @@ export default class Application {
   }
 
   public initRoutes() {
-    this.expressApp.use('/offer', this.offerController.router);
+    this.expressApp.use('/offers', this.offerController.router);
   }
 
   public async init() {

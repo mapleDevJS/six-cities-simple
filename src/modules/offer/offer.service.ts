@@ -36,9 +36,9 @@ export default class OfferService implements OfferServiceInterface {
         {
           $lookup: {
             from: 'comments',
-            let: {commentsId: '$_id'},
+            let: {commentId: '$_id'},
             pipeline: [
-              {$match: {$expr: {$in: ['$$commentsId', '$commentsCount']}}},
+              {$match: {$expr: {$in: ['$$commentId', '$commentsCount']}}},
               {$project: {_id: 1}}
             ],
             as: 'comments'
