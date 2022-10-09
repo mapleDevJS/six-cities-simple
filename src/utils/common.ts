@@ -1,19 +1,29 @@
 import crypto from 'crypto';
-import { OfferType } from '../types/offer-type.enum.js';
-import {City} from '../types/city.enum';
-import {Facility} from '../types/facility.enum';
+import { OfferType } from '../types/offer-type.enum';
+import { Facility } from '../types/facility.enum';
+import { CityLocation } from '../constants/city-location.constant.js';
+import { City } from '../types/city.enum';
+import { Offer } from '../types/offer.type';
+import { getRandomBoolean, getRandomIntInclusive } from './random.js';
 
-export const createOffer = (row: string) => {
+export const createOffer = (row: string): Offer => {
   const tokens = row.replace('\n', '').split('\t');
-  const [name, description, publishedDate, city, preview, pictures, premium, rating, type, bedrooms, guests, price, facilities, email, avatarPath, firstName, lastName, comments, latitude, longitude] = tokens;
+  const [name, description, postDate, city, preview, pictures, rating, type, bedrooms, guests, price, facilities, email, avatarPath, firstName, lastName, latitude, longitude] = tokens;
   return {
     name,
     description,
-    publishedDate: new Date(publishedDate),
-    city: city as City,
+    postDate: new Date(postDate),
+    city: {
+      name: city as City,
+      location: {
+        latitude: CityLocation[city as City].latitude,
+        longitude: CityLocation[city as City].longitude,
+      },
+      zoom: 10
+    },
     preview,
     pictures: pictures.split(';').map((picture) => picture),
-    isPremium: Boolean(premium),
+    isPremium: getRandomBoolean(),
     rating: Number.parseInt(rating, 10),
     type: type as OfferType,
     bedrooms: Number.parseInt(bedrooms, 10),
@@ -24,9 +34,10 @@ export const createOffer = (row: string) => {
       email,
       avatarPath,
       firstName,
-      lastName
+      lastName,
+      isPro: getRandomBoolean()
     },
-    comments: Number.parseInt(comments, 10),
+    commentsCount: getRandomIntInclusive(0, 100),
     coords: {
       latitude: Number.parseFloat(latitude),
       longitude: Number.parseFloat(longitude)

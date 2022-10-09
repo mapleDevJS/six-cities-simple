@@ -3,4 +3,5 @@ export type User = {
   avatarPath: string;
   firstName: string;
   lastName: string;
+  isPro: boolean;
 }

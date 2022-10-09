@@ -6,8 +6,8 @@ import {LoggerInterface} from '../../common/logger/logger.interface.js';
 import {OfferEntity} from './offer.entity.js';
 import CreateOfferDto from './dto/create-offer.dto.js';
 import UpdateOfferDto from './dto/update-offer.dto.js';
-import {DEFAULT_OFFER_COUNT} from './offer.constant.js';
 import {SortType} from '../../types/sort-type.enum.js';
+import { DEFAULT_OFFER_COUNT } from './offer.constant.js';
 
 @injectable()
 export default class OfferService implements OfferServiceInterface {
@@ -29,11 +29,29 @@ export default class OfferService implements OfferServiceInterface {
       .exec();
   }
 
-  public async find(): Promise<DocumentType<OfferEntity>[]> {
+  public async find(count?: number): Promise<DocumentType<OfferEntity>[]> {
+    const limit = count ?? DEFAULT_OFFER_COUNT;
     return this.offerModel
-      .find()
-      .populate(['userId', 'categories'])
-      .exec();
+      .aggregate([
+        {
+          $lookup: {
+            from: 'comments',
+            let: {commentsId: '$_id'},
+            pipeline: [
+              {$match: {$expr: {$in: ['$$commentsId', '$commentsCount']}}},
+              {$project: {_id: 1}}
+            ],
+            as: 'comments'
+          },
+        },
+        {
+          $addFields:
+            {id: {$toString: '$_id'}, commentsCount: {$size: '$comments'}}
+        },
+        {$unset: 'comments'},
+        {$limit: limit},
+        {$sort: {offerCount: SortType.Down}}
+      ]).exec();
   }
 
   public async deleteById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
@@ -45,15 +63,7 @@ export default class OfferService implements OfferServiceInterface {
   public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndUpdate(offerId, dto, {new: true})
-      .populate(['userId', 'categories'])
-      .exec();
-  }
-
-  public async findByCategoryId(categoryId: string, count?: number): Promise<DocumentType<OfferEntity>[]> {
-    const limit = count ?? DEFAULT_OFFER_COUNT;
-    return this.offerModel
-      .find({categories: categoryId}, {}, {limit})
-      .populate(['userId', 'categories'])
+      .populate(['userId'])
       .exec();
   }
 
@@ -64,9 +74,11 @@ export default class OfferService implements OfferServiceInterface {
 
   public async incCommentCount(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
-      .findByIdAndUpdate(offerId, {'$inc': {
-        commentCount: 1,
-      }}).exec();
+      .findByIdAndUpdate(offerId, {
+        '$inc': {
+          commentCount: 1,
+        }
+      }).exec();
   }
 
   public async findNew(count: number): Promise<DocumentType<OfferEntity>[]> {
@@ -74,7 +86,7 @@ export default class OfferService implements OfferServiceInterface {
       .find()
       .sort({createdAt: SortType.Down})
       .limit(count)
-      .populate(['userId', 'categories'])
+      .populate(['userId'])
       .exec();
   }
 
@@ -83,7 +95,27 @@ export default class OfferService implements OfferServiceInterface {
       .find()
       .sort({commentCount: SortType.Down})
       .limit(count)
-      .populate(['userId', 'categories'])
+      .populate(['userId'])
       .exec();
+  }
+
+  public async findPremiums(): Promise<DocumentType<OfferEntity>[]> {
+    return this.offerModel
+      .find({isPremium: true})
+      .sort({createdAt: SortType.Down})
+      .populate(['userId'])
+      .exec();
+  }
+
+  public async calcRating(offerId: string, newRating: number): Promise<DocumentType<OfferEntity> | null> {
+    const oldOffer = await this.offerModel.findById(offerId).lean();
+    const oldRating = oldOffer?.rating;
+
+    return this.offerModel
+      .findByIdAndUpdate(offerId, {
+        '$set': {
+          rating: oldRating ? ((oldRating + newRating) / 2).toFixed(1) : newRating,
+        }
+      }).exec();
   }
 }

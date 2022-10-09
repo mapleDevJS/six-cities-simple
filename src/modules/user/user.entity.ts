@@ -20,25 +20,35 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
     this.avatarPath = data.avatarPath;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
+    this.isPro = data.isPro;
   }
 
-  @prop({ unique: true, required: true })
+  @prop({
+    unique: true,
+    match: [/^([\w-\\.]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Email is incorrect']
+  })
   public email!: string;
 
-  @prop({required: false, default: ''})
+  @prop({
+    required: true,
+    match: [/^\S*$/, 'Spaces in the password are not allowed'],
+    minlength: [6, 'Min length for the password is 6 simbols']
+  })
+  public password!: string;
+
+  @prop({
+    match: [/^(?:.*\.(?=(jpg|jpeg|png)$))?[^.]*$/i, 'Only jpg or png format is allowed']
+  })
   public avatarPath!: string;
+
+  @prop({required: true})
+  public isPro!: boolean;
 
   @prop({ required: true, default: '' })
   public firstName!: string;
 
   @prop({required: true, default: ''})
   public lastName!: string;
-
-  @prop({ required: true, default: '' })
-  public password!: string;
-
-  @prop()
-  public userType!: string;
 
   public setPassword(password: string, salt: string) {
     this.password = createSHA256(password, salt);
