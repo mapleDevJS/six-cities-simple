@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 import {ClassConstructor, plainToInstance} from 'class-transformer';
-import { OfferType } from '../types/offer-type.enum';
-import { Facility } from '../types/facility.enum';
+import { OfferType } from '../types/offer-type.enum.js';
+import { Facility } from '../types/facility.enum.js';
 import { CityLocation } from '../constants/city-location.constant.js';
-import { City } from '../types/city.enum';
-import { Offer } from '../types/offer.type';
+import { City } from '../types/city.enum.js';
+import { Offer } from '../types/offer.type.js';
 import { getRandomBoolean, getRandomIntInclusive } from './random.js';
 
 export const createOffer = (row: string): Offer => {

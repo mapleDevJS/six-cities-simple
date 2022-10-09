@@ -4,7 +4,7 @@ import { OfferType } from '../../types/offer-type.enum.js';
 import { Facility } from '../../types/facility.enum.js';
 import { UserEntity } from '../user/user.entity.js';
 import { Coords } from '../../types/coords.type.js';
-import { Location } from '../../types/location.type';
+import { Location } from '../../types/location.type.js';
 
 const {prop, modelOptions} = typegoose;
 

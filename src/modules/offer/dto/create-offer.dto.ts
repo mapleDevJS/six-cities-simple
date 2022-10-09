@@ -1,9 +1,9 @@
-import {City} from '../../../types/city.enum';
-import {OfferType} from '../../../types/offer-type.enum';
-import {Facility} from '../../../types/facility.enum';
-import {User} from '../../../types/user.type';
-import {Coords} from '../../../types/coords.type';
-import {Location} from '../../../types/location.type';
+import {City} from '../../../types/city.enum.js';
+import {OfferType} from '../../../types/offer-type.enum.js';
+import {Facility} from '../../../types/facility.enum.js';
+import {User} from '../../../types/user.type.js';
+import {Coords} from '../../../types/coords.type.js';
+import {Location} from '../../../types/location.type.js';
 
 export default class CreateOfferDto {
   public userId!: string;

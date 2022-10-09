@@ -8,6 +8,7 @@ import {Controller} from '../../common/controller/controller.js';
 import {LoggerInterface} from '../../common/logger/logger.interface.js';
 import OfferResponse from './response/offer.response.js';
 import {fillDTO} from '../../utils/common.js';
+import CreateOfferDto from './dto/create-offer.dto.js';
 
 @injectable()
 export default class OfferController extends Controller {
@@ -29,7 +30,12 @@ export default class OfferController extends Controller {
     this.send(res, StatusCodes.OK, offerResponse);
   }
 
-  public create(_req: Request, _res: Response): void {
-    // Код обработчика
+  public async create(
+    {body}: Request<Record<string, unknown>, Record<string, unknown>, CreateOfferDto>,
+    res: Response
+  ): Promise<void> {
+    const result = await this.offerService.create(body);
+    const offer = await this.offerService.findByOfferId(result.id);
+    this.created(res, fillDTO(OfferResponse, offer));
   }
 }

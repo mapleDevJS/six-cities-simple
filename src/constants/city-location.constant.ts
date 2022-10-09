@@ -1,5 +1,5 @@
-import {City} from '../types/city.enum';
-import {Location} from '../types/location.type';
+import {City} from '../types/city.enum.js';
+import {Location} from '../types/location.type.js';
 
 export const CityLocation: Record<City, Location> = {
   Paris: {

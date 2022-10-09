@@ -51,7 +51,6 @@ export default class OfferService implements OfferServiceInterface {
         {$limit: DEFAULT_OFFER_COUNT},
         {$sort: {offerCount: SortType.Down}}
       ]).exec();
-    return this.offerModel.find({}).populate(['userId']).exec();
   }
 
   public async deleteById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
