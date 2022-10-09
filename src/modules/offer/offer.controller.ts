@@ -1,11 +1,13 @@
 import {Request, Response} from 'express';
 import {inject, injectable} from 'inversify';
-import {Controller} from '../../common/controller/controller.js';
-import {Component} from '../../types/component.types.js';
-import {LoggerInterface} from '../../common/logger/logger.interface.js';
-import {HttpMethod} from '../../types/http-method.enum.js';
-import {OfferServiceInterface} from './offer-service.interface.js';
 import {StatusCodes} from 'http-status-codes';
+import {HttpMethod} from '../../types/http-method.enum.js';
+import {Component} from '../../types/component.types.js';
+import {OfferServiceInterface} from './offer-service.interface.js';
+import {Controller} from '../../common/controller/controller.js';
+import {LoggerInterface} from '../../common/logger/logger.interface.js';
+import OfferResponse from './response/offer.response.js';
+import {fillDTO} from '../../utils/common.js';
 
 @injectable()
 export default class OfferController extends Controller {
@@ -23,7 +25,8 @@ export default class OfferController extends Controller {
 
   public async index(_req: Request, res: Response): Promise<void> {
     const offers = await this.offerService.find();
-    this.send(res, StatusCodes.OK, offers);
+    const offerResponse = fillDTO(OfferResponse, offers);
+    this.send(res, StatusCodes.OK, offerResponse);
   }
 
   public create(_req: Request, _res: Response): void {
