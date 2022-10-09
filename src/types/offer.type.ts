@@ -3,12 +3,17 @@ import {Facility} from './facility.enum';
 import {OfferType} from './offer-type.enum';
 import {User} from './user.type';
 import {Coords} from './coords.type';
+import {Location} from './location.type';
 
 export type Offer = {
   name: string;
   description: string;
-  publishedDate: Date;
-  city: City;
+  postDate: Date;
+  city: {
+    name: City;
+    location: Location;
+    zoom: number;
+  };
   preview: string,
   pictures: string[],
   isPremium: boolean;
@@ -19,6 +24,6 @@ export type Offer = {
   price: number;
   facilities: Facility[];
   user: User;
-  comments: number;
+  commentsCount: number;
   coords: Coords;
 }

@@ -21,3 +21,5 @@ export const getRandomFloat = (min: number, max: number, decimals: number) => {
 
   return parseFloat(str);
 };
+
+export const getRandomBoolean = () => Math.random() < 0.5;
