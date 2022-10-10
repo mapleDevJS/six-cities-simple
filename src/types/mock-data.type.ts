@@ -1,6 +1,6 @@
-import {City} from './city.enum';
-import {OfferType} from './offer-type.enum';
-import {Facility} from './facility.enum';
+import {City} from './city.enum.js';
+import {OfferType} from './offer-type.enum.js';
+import {Facility} from './facility.enum.js';
 
 export type MockData = {
   names: string[];

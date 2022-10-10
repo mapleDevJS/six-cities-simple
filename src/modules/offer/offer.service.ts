@@ -7,7 +7,7 @@ import {OfferEntity} from './offer.entity.js';
 import CreateOfferDto from './dto/create-offer.dto.js';
 import UpdateOfferDto from './dto/update-offer.dto.js';
 import {SortType} from '../../types/sort-type.enum.js';
-import { DEFAULT_OFFER_COUNT } from './offer.constant.js';
+import {DEFAULT_OFFER_COUNT} from './offer.constant.js';
 
 @injectable()
 export default class OfferService implements OfferServiceInterface {
@@ -29,16 +29,15 @@ export default class OfferService implements OfferServiceInterface {
       .exec();
   }
 
-  public async find(count?: number): Promise<DocumentType<OfferEntity>[]> {
-    const limit = count ?? DEFAULT_OFFER_COUNT;
+  public async find(): Promise<DocumentType<OfferEntity>[]> {
     return this.offerModel
       .aggregate([
         {
           $lookup: {
             from: 'comments',
-            let: {commentsId: '$_id'},
+            let: {offerId: '$_id'},
             pipeline: [
-              {$match: {$expr: {$in: ['$$commentsId', '$commentsCount']}}},
+              {$match: {$expr: {$eq: ['$offerId', '$$offerId']}}},
               {$project: {_id: 1}}
             ],
             as: 'comments'
@@ -46,10 +45,10 @@ export default class OfferService implements OfferServiceInterface {
         },
         {
           $addFields:
-            {id: {$toString: '$_id'}, commentsCount: {$size: '$comments'}}
+          {id: {$toString: '$_id'}, commentsCount: {$size: '$comments'}}
         },
         {$unset: 'comments'},
-        {$limit: limit},
+        {$limit: DEFAULT_OFFER_COUNT},
         {$sort: {offerCount: SortType.Down}}
       ]).exec();
   }

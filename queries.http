@@ -2,3 +2,113 @@
 GET http://localhost:3123/api HTTP/1.1
 
 ###
+
+# Объявления
+## Получить список объявлений
+
+GET http://localhost:4000/offers HTTP/1.1
+Content-Type: application/json
+
+###
+
+## Создать новое объявление
+
+POST http://localhost:4000/offers HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "63445aabd972716564ed31d2",
+  "name": "Keks Academy",
+  "description": "Central micro-studio with full equipment. Right across from Cologne's main train station and Cologne's cathedral, it's a perfect place to stay. In the immediate vicinity are the Philharmonie, Schildergasse, Cologne's Old Town and the Musical Cathedral. Countless restaurants and bars are within walking distance.",
+  "postDate": "022-09-30T19:12:43.697Z",
+  "city": {
+    "name": "Paris",
+    "location": {
+      "latitude": 50.938361,
+      "longtitude": 6.959974
+    }
+  },
+  "preview": "https://a0.muscache.com/im/pictures/766e6b0a-fe6d-4fc3-9c55-5203a8b35c84.jpg?im_w=1200",
+  "pictures": [
+    "https://a0.muscache.com/im/pictures/f61433ea-0af9-414e-95b1-09cf370cd554.jpg?im_w=1440",
+    "https://a0.muscache.com/im/pictures/588563a9-31c8-4cf0-94d8-7e6f2573b14e.jpg?im_w=1440"
+  ],
+  "isPremium": true,
+  "rating": 4.6,
+  "type": "House",
+  "bedrooms": 5,
+  "guests": 10,
+  "price": 12005,
+  "facilities": [
+    "BabySeat",
+    "Washer",
+    "Towels",
+    "Fridge"
+  ],
+  "user": {
+    "firstName": "Keks",
+    "lastName": "Academy",
+    "email": "keks.academy@local.com",
+    "avatarPath": "cat.png",
+    "isPro": true,
+    "password": "pass"
+  },
+  "coords": {
+    "latitude": 50.938361,
+    "longitude": 6.959974
+  }
+}
+
+###
+
+# Объявления
+## Объявление по идентификатору
+
+GET http://localhost:4000/offers/63445c0a69b02493d937879e HTTP/1.1
+
+###
+
+# Пользователи
+## Регистрация пользователя
+
+POST http://localhost:4000/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "torans@overlook.net",
+  "avatarPath": "torrance.png",
+  "firstName": "Jack",
+  "lastName": "Torrance",
+  "password": "shining",
+  "isPro": true
+}
+
+###
+
+## Авторизация пользователя
+
+POST http://localhost:4000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "torans@overlook.net",
+  "password": "123456"
+}
+
+###
+
+## Удаление объявления
+
+DELETE http://localhost:4000/offers/63445c0a69b02493d937879e HTTP/1.1
+
+###
+
+## Обновление объявления
+
+PATCH http://localhost:4000/offers/63445c0a69b02493d937879e HTTP/1.1
+Content-Type: application/json
+
+{
+  "description": "Проверка обновления",
+  "price": 1100
+}

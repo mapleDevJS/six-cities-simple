@@ -1,5 +1,5 @@
-import {User} from '../../types/user.type.js';
 import typegoose, {getModelForClass, defaultClasses} from '@typegoose/typegoose';
+import {User} from '../../types/user.type.js';
 import {createSHA256} from '../../utils/common.js';
 
 const {prop, modelOptions} = typegoose;

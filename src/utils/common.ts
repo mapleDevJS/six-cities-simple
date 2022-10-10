@@ -1,9 +1,10 @@
 import crypto from 'crypto';
-import { OfferType } from '../types/offer-type.enum';
-import { Facility } from '../types/facility.enum';
+import {ClassConstructor, plainToInstance} from 'class-transformer';
+import { OfferType } from '../types/offer-type.enum.js';
+import { Facility } from '../types/facility.enum.js';
 import { CityLocation } from '../constants/city-location.constant.js';
-import { City } from '../types/city.enum';
-import { Offer } from '../types/offer.type';
+import { City } from '../types/city.enum.js';
+import { Offer } from '../types/offer.type.js';
 import { getRandomBoolean, getRandomIntInclusive } from './random.js';
 
 export const createOffer = (row: string): Offer => {
@@ -52,3 +53,10 @@ export const createSHA256 = (line: string, salt: string): string => {
   const shaHasher = crypto.createHmac('sha256', salt);
   return shaHasher.update(line).digest('hex');
 };
+
+export const fillDTO = <T, V>(someDto: ClassConstructor<T>, plainObject: V) =>
+  plainToInstance(someDto, plainObject, {excludeExtraneousValues: true});
+
+export const createErrorObject = (message: string) => ({
+  error: message,
+});

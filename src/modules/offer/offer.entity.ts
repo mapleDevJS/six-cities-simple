@@ -4,7 +4,7 @@ import { OfferType } from '../../types/offer-type.enum.js';
 import { Facility } from '../../types/facility.enum.js';
 import { UserEntity } from '../user/user.entity.js';
 import { Coords } from '../../types/coords.type.js';
-import { Location } from '../../types/location.type';
+import { Location } from '../../types/location.type.js';
 
 const {prop, modelOptions} = typegoose;
 
@@ -32,9 +32,10 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public description!: string;
 
   @prop({
-    required: true
+    required: true,
+    type: () => String,
   })
-  public postDate!: Date;
+  public postDate!: string;
 
   @prop({
     required: true
