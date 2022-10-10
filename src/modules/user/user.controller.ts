@@ -27,6 +27,7 @@ export default class UserController extends Controller {
     this.addRoute({path: '/login', method: HttpMethod.Post, handler: this.login});
   }
 
+  // Создание нового пользователя.
   public async create(
     {body}: Request<Record<string, unknown>, Record<string, unknown>, CreateUserDto>,
     res: Response,
@@ -48,6 +49,7 @@ export default class UserController extends Controller {
     );
   }
 
+  // Вход в закрытую часть приложения.
   public async login(
     {body}: Request<Record<string, unknown>, Record<string, unknown>, LoginUserDto>,
     _res: Response,

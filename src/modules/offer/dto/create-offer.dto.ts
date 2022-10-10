@@ -9,7 +9,7 @@ export default class CreateOfferDto {
   public userId!: string;
   public name!: string;
   public description!: string;
-  public postDate!: Date;
+  public postDate!: string;
   public city!: { name: City, location: Location };
   public preview!: string;
   public pictures!: string[];

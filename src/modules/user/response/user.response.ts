@@ -14,5 +14,5 @@ export default class UserResponse {
   public lastName!: string;
 
   @Expose()
-  public isPremium!: boolean;
+  public isPro!: boolean;
 }

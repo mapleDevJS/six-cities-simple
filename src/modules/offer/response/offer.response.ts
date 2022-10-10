@@ -1,8 +1,9 @@
-import {Expose} from 'class-transformer';
+import {Expose, Type} from 'class-transformer';
 import {City} from '../../../types/city.enum.js';
 import {Location} from '../../../types/location.type.js';
 import {OfferType} from '../../../types/offer-type.enum.js';
 import {Facility} from '../../../types/facility.enum.js';
+import UserResponse from '../../user/response/user.response.js';
 
 export default class CategoryResponse {
   @Expose()
@@ -52,4 +53,8 @@ export default class CategoryResponse {
 
   @Expose()
   public coords!: Location;
+
+  @Expose({ name: 'userId'})
+  @Type(() => UserResponse)
+  public user!: UserResponse;
 }
