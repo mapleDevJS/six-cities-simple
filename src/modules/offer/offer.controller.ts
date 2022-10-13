@@ -16,6 +16,7 @@ import {CommentServiceInterface} from '../comment/comment-service.interface.js';
 import CommentResponse from '../comment/response/comment.response.js';
 import { ValidateObjectIdMiddleware } from '../../common/middlewares/validate-objectid.middleware.js';
 import { ValidateDtoMiddleware } from '../../common/middlewares/validate-dto.middleware.js';
+import {DocumentExistsMiddleware} from '../../common/middlewares/document-exists.middleware.js';
 
 type ParamsGetOffer = {
   offerId: string;
@@ -65,7 +66,10 @@ export default class OfferController extends Controller {
       path: '/:offerId/comments',
       method: HttpMethod.Get,
       handler: this.getComments,
-      middlewares: [new ValidateObjectIdMiddleware('offerId')]
+      middlewares: [
+        new ValidateObjectIdMiddleware('offerId'),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+      ]
     });
   }
 
@@ -145,14 +149,6 @@ export default class OfferController extends Controller {
     {params}: Request<core.ParamsDictionary | ParamsGetOffer, object, object>,
     res: Response
   ): Promise<void> {
-    if (!await this.offerService.exists(params.offerId)) {
-      throw new HttpError(
-        StatusCodes.NOT_FOUND,
-        `Offer with id ${params.offerId} not found.`,
-        'OfferController'
-      );
-    }
-
     const comments = await this.commentService.findByOfferId(params.offerId);
     this.ok(res, fillDTO(CommentResponse, comments));
   }
