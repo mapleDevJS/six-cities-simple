@@ -8,7 +8,6 @@ import {
   IsDateString,
   IsEnum,
   IsInt,
-  IsMongoId,
   Max,
   MaxLength,
   Min,
@@ -19,7 +18,6 @@ import {
 } from 'class-validator';
 
 export default class CreateOfferDto {
-  @IsMongoId({message: 'userId field must be valid an id'})
   public userId!: string;
 
   @MinLength(10, {message: 'Minimum title length must be 10'})
