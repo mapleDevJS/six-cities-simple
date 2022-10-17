@@ -8,7 +8,8 @@ import { CityLocation } from '../constants/city-location.constant.js';
 import { City } from '../types/city.enum.js';
 import { Offer } from '../types/offer.type.js';
 import { getRandomBoolean, getRandomIntInclusive } from './random.js';
-import {ValidationErrorField} from '../types/validation-error-field.type';
+import {ValidationErrorField} from '../types/validation-error-field.type.js';
+import {ServiceError} from '../types/service-error.enum.js';
 
 export const createOffer = (row: string): Offer => {
   const tokens = row.replace('\n', '').split('\t');
@@ -60,8 +61,10 @@ export const createSHA256 = (line: string, salt: string): string => {
 export const fillDTO = <T, V>(someDto: ClassConstructor<T>, plainObject: V) =>
   plainToInstance(someDto, plainObject, {excludeExtraneousValues: true});
 
-export const createErrorObject = (message: string) => ({
-  error: message,
+export const createErrorObject = (serviceError: ServiceError, message: string, details: ValidationErrorField[] = []) => ({
+  errorType: serviceError,
+  message,
+  details: [...details]
 });
 
 export const createJWT = async (algorithm: string, jwtSecret: string, payload: object): Promise<string> =>
@@ -77,3 +80,5 @@ export const transformErrors = (errors: ValidationError[]): ValidationErrorField
     value,
     messages: constraints ? Object.values(constraints) : []
   }));
+
+
