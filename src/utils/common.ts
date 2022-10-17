@@ -1,12 +1,14 @@
 import * as jose from 'jose';
 import crypto from 'crypto';
 import {ClassConstructor, plainToInstance} from 'class-transformer';
+import {ValidationError} from 'class-validator';
 import { OfferType } from '../types/offer-type.enum.js';
 import { Facility } from '../types/facility.enum.js';
 import { CityLocation } from '../constants/city-location.constant.js';
 import { City } from '../types/city.enum.js';
 import { Offer } from '../types/offer.type.js';
 import { getRandomBoolean, getRandomIntInclusive } from './random.js';
+import {ValidationErrorField} from '../types/validation-error-field.type';
 
 export const createOffer = (row: string): Offer => {
   const tokens = row.replace('\n', '').split('\t');
@@ -68,3 +70,10 @@ export const createJWT = async (algorithm: string, jwtSecret: string, payload: o
     .setIssuedAt()
     .setExpirationTime('2d')
     .sign(crypto.createSecretKey(jwtSecret, 'utf-8'));
+
+export const transformErrors = (errors: ValidationError[]): ValidationErrorField[] =>
+  errors.map(({property, value, constraints}) => ({
+    property,
+    value,
+    messages: constraints ? Object.values(constraints) : []
+  }));
