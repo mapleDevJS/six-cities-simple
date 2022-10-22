@@ -14,7 +14,7 @@ import {
   MinLength,
   IsBoolean,
   IsDecimal,
-  ValidateNested, IsString
+  ValidateNested
 } from 'class-validator';
 
 export default class CreateOfferDto {
@@ -33,10 +33,6 @@ export default class CreateOfferDto {
 
   @IsEnum(City, {message: 'city must be Amsterdam / Paris / Cologne / Brussels / Hamburg / Dusseldorf'})
   public city!: { name: City, location: Location };
-
-  @IsString({message: 'image is required'})
-  @MaxLength(256, {message: 'Too short for field «preview»'})
-  public preview!: string;
 
   @IsArray({message: 'Field pictures must be an array'})
   @MaxLength(256, {message: 'Too short for field «preview»'})
