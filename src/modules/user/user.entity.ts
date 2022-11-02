@@ -32,7 +32,8 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({
     required: true,
     match: [/^\S*$/, 'Spaces in the password are not allowed'],
-    minlength: [6, 'Min length for the password is 6 simbols']
+    minlength: [6, 'Min length for the password is 6 symbols'],
+    maxlength: [12, 'Max length for the password is 6 symbols']
   })
   public password!: string;
 

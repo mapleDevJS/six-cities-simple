@@ -146,6 +146,7 @@ export default class OfferController extends Controller {
     this.ok(res, fillDTO(OfferResponse, updatedOffer));
   }
 
+  // Получение списка комментариев для предложения.
   public async getComments(
     {params}: Request<core.ParamsDictionary | ParamsGetOffer, object, object>,
     res: Response

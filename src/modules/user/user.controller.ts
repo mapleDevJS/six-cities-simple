@@ -115,6 +115,7 @@ export default class UserController extends Controller {
     this.created(res, fillDTO(UploadUserAvatarResponse, uploaFile));
   }
 
+  // Проверка состояния пользователя.
   public async checkAuthenticate(req: Request, res: Response) {
     if (!req.user) {
       throw new HttpError(
