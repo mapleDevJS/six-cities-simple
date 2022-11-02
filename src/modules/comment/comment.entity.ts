@@ -4,7 +4,7 @@ import {OfferEntity} from '../offer/offer.entity.js';
 
 const {prop, modelOptions} = typegoose;
 
-export interface CommentEntity extends  defaultClasses.Base {}
+export interface CommentEntity extends defaultClasses.Base {}
 
 @modelOptions({
   schemaOptions: {
@@ -12,7 +12,12 @@ export interface CommentEntity extends  defaultClasses.Base {}
   }
 })
 export class CommentEntity extends defaultClasses.TimeStamps {
-  @prop({trim: true, required: true})
+  @prop({
+    trim: true,
+    required: true,
+    minlength: [5, 'Min length for the text is 5 symbols'],
+    maxlength: [1024, 'Max length for the text is 1024 symbols']
+  })
   public text!: string;
 
   @prop({
@@ -26,6 +31,19 @@ export class CommentEntity extends defaultClasses.TimeStamps {
     required: true,
   })
   public userId!: Ref<UserEntity>;
+
+  @prop({
+    required: true,
+    type: () => Date,
+  })
+  public postDate!: Date;
+
+  @prop({
+    required: true,
+    min: 1,
+    max: 5
+  })
+  public rating!: number;
 }
 
 export const CommentModel = getModelForClass(CommentEntity);

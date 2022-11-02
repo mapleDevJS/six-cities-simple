@@ -36,6 +36,7 @@ export default class CommentController extends Controller {
     });
   }
 
+  // Добавление комментария для предложения.
   public async create(
     req: Request<object, object, CreateCommentDto>,
     res: Response
