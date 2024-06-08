@@ -15,6 +15,10 @@ export type ConfigSchema = {
   JWT_SECRET: string;
   STATIC_DIRECTORY_PATH: string;
   HOST: string;
+  RATE_LIMIT: {
+    windowMs: number,
+    limit: number,
+  }
 }
 
 export const configSchema = convict<ConfigSchema>({
@@ -83,5 +87,14 @@ export const configSchema = convict<ConfigSchema>({
     format: String,
     env: 'HOST',
     default: 'localhost'
+  },
+  RATE_LIMIT: {
+    doc: 'Express rate limit',
+    format: Object,
+    env: 'RATE_LIMIT',
+    default: {
+      windowMs: 15 * 60 * 1000,
+      limit: 100
+    }
   }
 });

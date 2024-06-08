@@ -11,6 +11,7 @@ import {ControllerInterface} from '../common/controller/controller.interface.js'
 import {ExceptionFilterInterface} from '../common/errors/exception-filter.interface.js';
 import {AuthenticateMiddleware} from '../common/middlewares/authenticate.middleware.js';
 import {getFullServerPath} from '../utils/common.js';
+import limiter from 'express-rate-limit';
 
 @injectable()
 export default class Application {
@@ -46,6 +47,7 @@ export default class Application {
     );
 
     const authenticateMiddleware = new AuthenticateMiddleware(this.config.get('JWT_SECRET'));
+    this.expressApp.use(limiter(this.config.get('RATE_LIMIT')));
     this.expressApp.use(authenticateMiddleware.execute.bind(authenticateMiddleware));
     this.expressApp.use(cors());
   }
