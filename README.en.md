@@ -111,13 +111,13 @@
 
 ### [4.3.](https://up.htmlacademy.ru/nodejs-api/2/project/six-cities-simple#service)REST API service
 
-4.3.1. The settings necessary for the launch and operation of the service are transferred using environment variables.
+4.3.1. The settings necessary to start and operate the service are transferred using environment variables.
 
 4.3.2. A list of all environment variables is given in the file`readme.md`, which is located at the project root. Description format:`PARAM=value — описание`.
 
 4.3.3. For the convenience of transferring environment parameters, we use`.env`-files. They should not be stored in a version control system.
 
-4.3.4. At the project root is located`.env.example`. It contains a list of all the environment variables needed for the application to run. Variables are set to default values ​​(for example use).
+4.3.4. At the project root is located`.env.example`. It contains a list of all the environment variables needed for the application to run. The variables are set to default values ​​(for example use).
 
 ### [4.4.](https://up.htmlacademy.ru/nodejs-api/2/project/six-cities-simple#service-start)Starting the service
 
@@ -181,7 +181,7 @@
 
 5.4.5. The list of rental offers can be requested by anonymous and authorized clients.
 
-5.4.6. List of returned offer fields: rental price, name, type of housing, publication date, city, image preview, Premium flag, rating, number of comments.
+5.4.6. List of returned offer fields: rental price, name, type of housing, publication date, city, preview image, Premium flag, rating, number of comments.
 
 ### [5.5.](https://up.htmlacademy.ru/nodejs-api/2/project/six-cities-simple#get-details-offer)Detailed information on the offer
 
@@ -270,7 +270,7 @@
 ## [8.](https://up.htmlacademy.ru/nodejs-api/2/project/additional)Additionally
 
 8.1. The REST API specification is presented in the OpenAPI format. The specification is saved in the directory`specification`(at the root of the project).  
-8.2. YAML is used to describe the REST API specification.
+8.2. The REST API specification uses YAML to describe the specification.
 
 ## [9.](https://up.htmlacademy.ru/nodejs-api/2/project/six-cities-simple#requirements)Technical requirements
 
