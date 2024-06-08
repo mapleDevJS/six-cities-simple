@@ -8,7 +8,7 @@
 
 1.2. The service provides a REST API interface and a CLI interface.
 
-2.1. Создание нового предложения.
+2.1. Creating a new offer.
 
 2.2. Editing a proposal.
 
@@ -117,7 +117,7 @@
 
 4.3.3. For the convenience of transferring environment parameters, we use`.env`-files. They should not be stored in a version control system.
 
-4.3.4. At the project root is located`.env.example`. It contains a list of all the environment variables needed for the application to run. The variables are set to default values ​​(for example use).
+4.3.4. At the project root is located`.env.example`. It contains a list of all the environment variables needed for the application to run. Variables are set to default values ​​(for example use).
 
 ### [4.4.](https://up.htmlacademy.ru/nodejs-api/2/project/six-cities-simple#service-start)Starting the service
 
@@ -141,13 +141,13 @@
 
 5.1.4. Before creating an offer, the data received from the client is validated. If validation fails, the service returns an error and the correct status code. In this case, an offer is not created.
 
-5.1.5. If the offer is created successfully, the service returns information about the created offer (offer object) in the response.
+5.1.5. If the offer is successfully created, the service returns information about the created offer (offer object) in the response.
 
 ### [5.2.](https://up.htmlacademy.ru/nodejs-api/2/project/six-cities-simple#edit-offer)Editing an offer
 
 5.2.1. The service provides a resource for editing a proposal.
 
-5.2.2. Клиент может редактировать предложения по аренде, созданные им.
+5.2.2. The client can edit the rental offers created by him.
 
 5.2.3. When you try to edit someone else's rental offer, the service returns an error and the correct status code.
 
