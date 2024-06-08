@@ -1,5 +1,6 @@
 import * as jose from 'jose';
 import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 import {ClassConstructor, plainToInstance} from 'class-transformer';
 import {ValidationError} from 'class-validator';
 import { OfferType } from '../types/offer-type.enum.js';
@@ -55,10 +56,7 @@ export const createOffer = (row: string): Offer => {
 export const getErrorMessage = (error: unknown): string =>
   error instanceof Error ? error.message : '';
 
-export const createSHA256 = (line: string, salt: string): string => {
-  const shaHasher = crypto.createHmac('sha256', salt);
-  return shaHasher.update(line).digest('hex');
-};
+export const createBCrypt = (line: string, salt: string): string => bcrypt.hashSync(line, salt);
 
 export const fillDTO = <T, V>(someDto: ClassConstructor<T>, plainObject: V) =>
   plainToInstance(someDto, plainObject, {excludeExtraneousValues: true});

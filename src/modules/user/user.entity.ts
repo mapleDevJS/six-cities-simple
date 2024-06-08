@@ -1,6 +1,6 @@
 import typegoose, {getModelForClass, defaultClasses} from '@typegoose/typegoose';
 import {User} from '../../types/user.type.js';
-import {createSHA256} from '../../utils/common.js';
+import {createBCrypt} from '../../utils/common.js';
 
 const {prop, modelOptions} = typegoose;
 
@@ -52,7 +52,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   public lastName!: string;
 
   public setPassword(password: string, salt: string) {
-    this.password = createSHA256(password, salt);
+    this.password = createBCrypt(password, salt);
   }
 
   public getPassword() {
@@ -60,7 +60,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   }
 
   public verifyPassword(password: string, salt: string) {
-    const hashPassword = createSHA256(password, salt);
+    const hashPassword = createBCrypt(password, salt);
     return hashPassword === this.password;
   }
 }
