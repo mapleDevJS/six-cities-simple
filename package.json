@@ -19,6 +19,7 @@
     "mock:server": "json-server ./mocks/mock-server-data.json --port 3123"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/convict": "^6.1.1",
     "@types/convict-format-with-validator": "^6.0.2",
     "@types/cors": "^2.8.12",
@@ -50,11 +51,13 @@
   },
   "dependencies": {
     "@typegoose/typegoose": "^12.5.0",
+    "bcrypt": "^5.1.1",
     "chalk": "^5.0.1",
     "class-validator": "^0.14.0",
     "convict": "^6.2.4",
     "convict-format-with-validator": "^6.2.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dayjs": "^1.11.1",
     "dotenv": "16.0.0",
     "express-async-handler": "^1.2.0",
